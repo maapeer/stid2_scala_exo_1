@@ -1,18 +1,8 @@
-object Hello {
+object Geeks {
 
-    def main(args: Array[String]) =
-{var var3=2
- 
-	if (var3==1)
-	{
-	println("True")
-	}
-	else
-	{
-	println("False")
-	}
-
-        println("Hello, world")
+    def main(args: Array[String]) 
+{
+        println("Hello world by " +args(0))
 
     }
 
