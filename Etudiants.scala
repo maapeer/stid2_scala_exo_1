@@ -53,7 +53,7 @@ class notes (numEtu:Int, nomModule:String, note:Int){
 
 object mesNotes{
     def main(args: Array[String]) {
-        val Stats = new notes(22504955, "Statistiques", 20)
+        val Stats = new notes(22504955, "Statistiques", 11)
         println(Stats.toString())
 
     }
