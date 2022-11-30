@@ -81,8 +81,7 @@ def main(args:Array[String])
     movies.foreach {println}
     ratings.foreach {println}
     reviewers.foreach {println}
-}
-}
+
 
 
 
