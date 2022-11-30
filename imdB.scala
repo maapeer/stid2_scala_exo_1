@@ -47,10 +47,40 @@ def loadMovieData(path:String):Array[Movie]=
 bufferedSource.close
 return movies;
 }
+
+def loadRatingData(path:String):Array[Rating]=
+{
+    var ratings:Array[Rating]=Array.empty
+    val bufferedSource = io.Source.fromFile("rating.csv")
+    for (line<-bufferedSource.getLines){
+    val cols = line.split(",").map(_.trim)
+    val rating = new Rating(cols(0).toInt,cols(1).toInt,cols(2).toInt,cols(3).substring(1,cols(3).length()-1))
+    ratings = ratings :+rating
+}
+bufferedSource.close
+return ratings;
+}
+
+def loadReviewerData(path:String):Array[Reviewer]=
+{
+    var reviewers:Array[Reviewer]=Array.empty
+    val bufferedSource = io.Source.fromFile("reviewer.csv")
+    for (line<-bufferedSource.getLines){
+    val cols = line.split(",").map(_.trim)
+    val reviewer = new Reviewer(cols(0).toInt,cols(1).substring(1,cols(1).length()-1))
+    reviewers = reviewers :+reviewer
+}
+bufferedSource.close
+return reviewers;
+}
 def main(args:Array[String])
 {
     var movies:Array[Movie] = loadMovieData("movie.csv")
+    var ratings:Array[Rating] = loadRatingData("rating.csv")
+    var reviewers:Array[Reviewer] = loadReviewerData("reviewer.csv")
     movies.foreach {println}
+    ratings.foreach {println}
+    reviewers.foreach {println}
 }
 }
 
