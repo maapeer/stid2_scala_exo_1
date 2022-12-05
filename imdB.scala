@@ -8,7 +8,7 @@ class Movie(MId:Int, title:String,year: Int,director:String){
     var Year : Int= year
     var Director : String=director
 
-    override def toString():String= mId+""+Title+""+Year+""+Director
+    override def toString():String= mId+" "+Title+" "+Year+" "+Director
 }
 
 
@@ -17,7 +17,7 @@ class Reviewer(rId:Int, name:String){
     var Rid : Int=rId
     var Nom : String=name
 
-    override def toString():String= Rid+""+Nom 
+    override def toString():String= Rid+" "+Nom 
 
 }
 
@@ -27,9 +27,9 @@ class Rating(rId:Int, mID:Int, stars:Int, ratingDate:String){
     var Star : Int=stars
     var date : String = ratingDate
     val format = new SimpleDateFormat("yyyy-mm-dd")
-    val datee = format.parse(ratingDate)
+    val datee = format.parse(date)
 
-    override def toString():String= Rid+""+Mid+""+Star+""+datee
+    override def toString():String= Rid+" "+Mid+" "+Star+" "+datee
 
 }
 
@@ -78,10 +78,23 @@ def main(args:Array[String])
     var movies:Array[Movie] = loadMovieData("movie.csv")
     var ratings:Array[Rating] = loadRatingData("rating.csv")
     var reviewers:Array[Reviewer] = loadReviewerData("reviewer.csv")
-    movies.foreach {println}
-    ratings.foreach {println}
-    reviewers.foreach {println}
+    movies.filter(_.Director == "Steven Spielberg") foreach{println}
+    var MonSuperTablea = Array.concat(movies, ratings)
+    MonSuperTableau.foreach {println}
+    //movies.foreach {println}
+    //ratings.foreach {println}
+    ///reviewers.foreach {println}
+}
+    // def requete1(args:Array[Movie])
+    // {
+    //     var movies : Array[Movie] = loadMovieData("movie.csv")
 
+    //     val filmSpielberg = movies.filter(_ == "Steven Spielberg")
+    //     filmSpielberg.foreach{println}
+    // }
+    // }
+
+}
 
 
 
