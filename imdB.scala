@@ -79,8 +79,13 @@ def main(args:Array[String])
     var ratings:Array[Rating] = loadRatingData("rating.csv")
     var reviewers:Array[Reviewer] = loadReviewerData("reviewer.csv")
     movies.filter(_.Director == "Steven Spielberg") foreach{println}
-    var MonSuperTablea = Array.concat(movies, ratings)
-    MonSuperTableau.foreach {println}
+    f_filter01(ratings).map(x=>getMovieFromId(x.Mid,movies)(0).Year).distinct.sorted.foreach(println)
+    f_filter02(movies).foreach(println)
+    getRatingFromId(101, ratings).foreach(println)
+
+    var test = f_filter01(ratings)
+    test.foreach(println)
+
     //movies.foreach {println}
     //ratings.foreach {println}
     ///reviewers.foreach {println}
@@ -93,6 +98,31 @@ def main(args:Array[String])
     //     filmSpielberg.foreach{println}
     // }
     // }
+def f_filter01 (ratings:Array[Rating]):Array[Rating] = 
+{
+    return ratings.filter(_.Star >= 4) 
+}
+
+
+def getMovieFromId (p_mid:Int, movies:Array[Movie]):Array[Movie] = 
+{
+    return movies.filter(_.mId==p_mid) 
+}
+
+def getRatingFromId (p_mid:Int, ratings:Array[Rating]):Array[Rating] = 
+{
+    return ratings.filter(_.Mid==p_mid) 
+}
+
+def f_filter02 (movies:Array[Movie]):Array[Movie] = 
+{
+    return movies.filter(_.Title == "Gone with the Wind") 
+}
+
+def getReviewerFromMId (p_rid:Int, reviewers:Array[Reviewer]):Array[Reviewer] = 
+{
+    return reviewers.filter(_.Rid==p_rid) 
+}
 
 }
 
