@@ -80,8 +80,10 @@ def main(args:Array[String])
     var reviewers:Array[Reviewer] = loadReviewerData("reviewer.csv")
     movies.filter(_.Director == "Steven Spielberg") foreach{println}
     f_filter01(ratings).map(x=>getMovieFromId(x.Mid,movies)(0).Year).distinct.sorted.foreach(println)
-    f_filter02(movies).foreach(println)
-    getRatingFromId(101, ratings).foreach(println)
+    f_filter02(movies).flatMap(x=>getRatingFromMid(x.mId,ratings)).map(x=>getReviewerFromRId(x.Rid,reviewers)(0).Nom).distinct.foreach(println)
+    getMovieFromDirector("Victor Fleming", movies).foreach(println)
+    getRadyFromMidRid(201,101,ratings).foreach(println)
+    getReviewerFromRid(201,review).foreach(println)
 
     var test = f_filter01(ratings)
     test.foreach(println)
@@ -109,7 +111,7 @@ def getMovieFromId (p_mid:Int, movies:Array[Movie]):Array[Movie] =
     return movies.filter(_.mId==p_mid) 
 }
 
-def getRatingFromId (p_mid:Int, ratings:Array[Rating]):Array[Rating] = 
+def getRatingFromMid (p_mid:Int, ratings:Array[Rating]):Array[Rating] = 
 {
     return ratings.filter(_.Mid==p_mid) 
 }
@@ -119,11 +121,20 @@ def f_filter02 (movies:Array[Movie]):Array[Movie] =
     return movies.filter(_.Title == "Gone with the Wind") 
 }
 
-def getReviewerFromMId (p_rid:Int, reviewers:Array[Reviewer]):Array[Reviewer] = 
+def getReviewerFromRId (p_rid:Int, reviewers:Array[Reviewer]):Array[Reviewer] = 
 {
     return reviewers.filter(_.Rid==p_rid) 
 }
 
+def getMovieFromDirector(p_dir:Int, movies:Array[Movie]):Array[Movie] = 
+{
+    return movies.filter(_.Director==p_dir)
+}
+
+def getRadyFromMidRid(p_rid:Int, p_mid:Int, ratings:Array[Rating]):Array[Rating] = 
+{
+    return ratings.filter(_.Mid==p_mid & _.Rid==p_rid)
+}
 }
 
 
